@@ -25,13 +25,15 @@ class CategoryPage extends StatelessWidget {
                       color: Colors.white
                     ),),
                   ),
-                  MyButton(title: 'Text', icon: Icons.list_alt_outlined ,onClick: () {}),
+                  MyButton(title: 'Text', icon: Icons.list_alt_outlined ,onClick: () {
+                    print("fjkdsf");
+                  }),
                   MyButton(title: 'Image', icon: Icons.photo ,onClick: () {}),
                   MyButton(title: 'Fingerprint',icon: Icons.fingerprint, onClick: () {}),
                 ],
               ),
             ),
-          )
+          ),
         ],
       ),
     );
