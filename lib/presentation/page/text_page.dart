@@ -15,7 +15,7 @@ class _TextPageState extends State<TextPage> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          onPressed: () => context.canPop(),
+          onPressed: () => context.pop(),
           icon: const Icon(CupertinoIcons.back),
         ),
         title: const Text("Text"),

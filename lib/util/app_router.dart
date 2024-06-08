@@ -1,46 +1,33 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:marshmallow/presentation/page/category_page.dart';
+import 'package:marshmallow/presentation/page/image_page.dart';
 import 'package:marshmallow/presentation/page/text_page.dart';
 
+import '../presentation/page/finger_page.dart';
+
 class AppRouter {
-  static final _rootKey = GlobalKey<NavigatorState>();
-  static final _shellKey = GlobalKey<NavigatorState>();
 
   static final router = GoRouter(
-    navigatorKey: _rootKey,
-    initialLocation: "/",
-    routes: [
-      ShellRoute(
-        navigatorKey: _shellKey,
-        builder: (context, state, child) {
-          return child;
-        },
-        routes: [
+    routes: <RouteBase>[
+      GoRoute(
+        path: '/',
+        builder: (BuildContext context, GoRouterState state) => const CategoryPage(),
+        routes: <RouteBase>[
           GoRoute(
-              path: '/',
-              parentNavigatorKey: _shellKey,
-              builder: (context, state) => const CategoryPage()
-           //   pageBuilder: (context, state) => const NoTransitionPage(child: CategoryPage())
+            path: 'text',
+            builder: (BuildContext context, GoRouterState state) => const TextPage(),
           ),
           GoRoute(
-              path: '/text',
-              parentNavigatorKey: _shellKey,
-         builder: (context, state) => const TextPage()
-         //     pageBuilder: (context, state) => const NoTransitionPage(child: TextPage())
+            path: 'image',
+            builder: (BuildContext context, GoRouterState state)  => const ImagePage(),
           ),
           GoRoute(
-              path: '/image',
-              parentNavigatorKey: _shellKey,
-              pageBuilder: (context, state) => const NoTransitionPage(child: Text("Image"))
+            path: 'finger',
+            builder: (BuildContext context, GoRouterState state) => const FingerPage(),
           ),
-          GoRoute(
-              path: '/finger',
-              parentNavigatorKey: _shellKey,
-              pageBuilder: (context, state) => const NoTransitionPage(child: Text("Fingerprint"))
-          ),
-        ]
-      )
-    ]
+        ],
+      ),
+    ],
   );
 }

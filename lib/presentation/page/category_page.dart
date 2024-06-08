@@ -26,9 +26,9 @@ class CategoryPage extends StatelessWidget {
                       color: Colors.white
                     ),),
                   ),
-                  MyButton(title: 'Text', icon: Icons.list_alt_outlined ,onClick: () => context.push("/text")),
-                  MyButton(title: 'Image', icon: Icons.photo ,onClick: () {}),
-                  MyButton(title: 'Fingerprint',icon: Icons.fingerprint, onClick: () {}),
+                  MyButton(title: 'Text', icon: Icons.list_alt_outlined ,onClick: () => context.go('/text')),
+                  MyButton(title: 'Image', icon: Icons.photo ,onClick: () => context.go('/image')),
+                  MyButton(title: 'Fingerprint',icon: Icons.fingerprint, onClick: () => context.go('/finger')),
                 ],
               ),
             ),
