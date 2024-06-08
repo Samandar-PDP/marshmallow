@@ -13,6 +13,7 @@ class _FingerPageState extends State<FingerPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       appBar: AppBar(
         leading: IconButton(
           onPressed: () => context.pop(),
