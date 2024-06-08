@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:marshmallow/presentation/widget/my_button.dart';
 
@@ -25,9 +26,7 @@ class CategoryPage extends StatelessWidget {
                       color: Colors.white
                     ),),
                   ),
-                  MyButton(title: 'Text', icon: Icons.list_alt_outlined ,onClick: () {
-                    print("fjkdsf");
-                  }),
+                  MyButton(title: 'Text', icon: Icons.list_alt_outlined ,onClick: () => context.push("/text")),
                   MyButton(title: 'Image', icon: Icons.photo ,onClick: () {}),
                   MyButton(title: 'Fingerprint',icon: Icons.fingerprint, onClick: () {}),
                 ],

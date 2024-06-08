@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class TextPage extends StatefulWidget {
   const TextPage({super.key});
@@ -12,7 +14,11 @@ class _TextPageState extends State<TextPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent
+        leading: IconButton(
+          onPressed: () => context.canPop(),
+          icon: const Icon(CupertinoIcons.back),
+        ),
+        title: const Text("Text"),
       ),
     );
   }
