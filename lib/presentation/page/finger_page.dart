@@ -13,14 +13,27 @@ class _FingerPageState extends State<FingerPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
         leading: IconButton(
           onPressed: () => context.pop(),
           icon: const Icon(CupertinoIcons.back),
         ),
-        title: const Text("Finger"),
       ),
+      body: Stack(children: [
+        Image.asset("assets/img/img.png",
+            fit: BoxFit.cover, width: double.infinity),
+        Padding(
+            padding: const EdgeInsets.all(22.0),
+            child: Center(
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+
+                    ])))
+      ]),
     );
   }
 }

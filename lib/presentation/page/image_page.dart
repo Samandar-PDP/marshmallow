@@ -13,13 +13,27 @@ class _ImagePageState extends State<ImagePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
         leading: IconButton(
           onPressed: () => context.pop(),
           icon: const Icon(CupertinoIcons.back),
         ),
-        title: const Text("Image"),
       ),
+      body: Stack(children: [
+        Image.asset("assets/img/img.png",
+            fit: BoxFit.cover, width: double.infinity),
+        Padding(
+            padding: const EdgeInsets.all(22.0),
+            child: Center(
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+
+                    ])))
+      ]),
     );
   }
 }
