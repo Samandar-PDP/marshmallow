@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:marshmallow/presentation/page/category_page.dart';
 import 'package:marshmallow/util/app_router.dart';
 
-void main() {
-  runApp(const MyApp());
+import 'package:marshmallow/di/injection_container.dart' as di;
 
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await di.init();
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
