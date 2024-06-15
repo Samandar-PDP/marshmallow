@@ -12,5 +12,5 @@ Future<void> init() async {
 
   sl.registerLazySingleton<LoveRepository>(() => LoveRepositoryImpl(sl()));
   sl.registerLazySingleton(() => GetRandomLoveUseCase(sl()));
-  sl.registerLazySingleton(() => ApiService(buildDioClient("http://127.0.0.1:6060")));
+  sl.registerLazySingleton(() => ApiService(buildDioClient("http://127.0.0.1:8080"))); // o'zinikini qo'y
 }

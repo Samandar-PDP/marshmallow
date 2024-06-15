@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:marshmallow/data/network/api_service.dart';
 import 'package:marshmallow/domain/repository/love_repository.dart';
 
@@ -8,5 +9,12 @@ class LoveRepositoryImpl extends LoveRepository {
   LoveRepositoryImpl(this.apiService); // dependency inversion
 
   @override
-  Future<LoveRandom> getRandom(String boyName, String girlName) => apiService.getLoveRandom();
+  Future<LoveRandom?> getRandom(String boyName, String girlName) async {
+    try {
+      return await apiService.getLoveRandom();
+    } catch(e) {
+      debugPrint(e.toString());
+      return null;
+    }
+  }
 }

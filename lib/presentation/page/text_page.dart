@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:marshmallow/presentation/bloc/love_bloc.dart';
 import 'package:marshmallow/presentation/widget/my_button.dart';
 
 class TextPage extends StatefulWidget {
@@ -26,7 +28,7 @@ class _TextPageState extends State<TextPage> {
       ),
       body: Stack(children: [
         Image.asset("assets/img/img.png",
-            fit: BoxFit.cover, width: double.infinity),
+            fit: BoxFit.cover, width: double.infinity,height: double.infinity,),
         Padding(
             padding: const EdgeInsets.all(22.0),
             child: Column(
@@ -48,14 +50,34 @@ class _TextPageState extends State<TextPage> {
                             height: double.infinity,
                           ),
                         ),
-                        Center(
-                            child: Text(
-                          "100%",
-                          style: GoogleFonts.permanentMarker(
-                              fontSize: 50,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold),
-                        )),
+                        BlocConsumer<LoveBloc, LoveState>(
+                            builder: (context, state) {
+                              if (state is LoveSuccess) {
+                                return TweenAnimationBuilder(
+                                    tween: Tween(begin: 0, end: state.value),
+                                    duration: const Duration(seconds: 2),
+                                    builder: (context, v, s) {
+                                      return Center(
+                                          child: Text(
+                                        "$v%",
+                                        style: GoogleFonts.permanentMarker(
+                                            fontSize: 50,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                      ));
+                                    });
+                              } else {
+                                return Center(
+                                    child: Text(
+                                  "0",
+                                  style: GoogleFonts.permanentMarker(
+                                      fontSize: 50,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ));
+                              }
+                            },
+                            listener: (context, state) {})
                       ]),
                     ),
                   ),
@@ -94,7 +116,7 @@ class _TextPageState extends State<TextPage> {
                       height: 50,
                       width: MediaQuery.of(context).size.width,
                       child: MyButton(
-                        onClick: () {},
+                        onClick: _getRandom,
                         icon: CupertinoIcons.heart_circle_fill,
                         title: "Generate",
                       )),
@@ -102,5 +124,8 @@ class _TextPageState extends State<TextPage> {
                 ]))
       ]),
     );
+  }
+  _getRandom() {
+    BlocProvider.of<LoveBloc>(context).add(const GetRandomLove("", ""));
   }
 }

@@ -11,7 +11,7 @@ class CategoryPage extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          Image.asset("assets/img/img.png",fit: BoxFit.cover,width: double.infinity),
+          Image.asset("assets/img/img.png",fit: BoxFit.cover,width: double.infinity,height: double.infinity,),
           Padding(
             padding: const EdgeInsets.all(22.0),
             child: Center(
