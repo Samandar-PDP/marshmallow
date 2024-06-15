@@ -25,6 +25,7 @@ class LoveBloc extends Bloc<LoveEvent, LoveState> {
         } catch(e) {
           print(e);
         }
+
         // await Future.delayed(const Duration(seconds: 2));
         // final value = await getRandomLoveUseCase(event.boyName, event.girlName);
         // if(value?.random != null) {
