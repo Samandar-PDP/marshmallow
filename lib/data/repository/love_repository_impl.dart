@@ -1,7 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:marshmallow/data/network/api_service.dart';
 import 'package:marshmallow/domain/repository/love_repository.dart';
-
 import '../model/love_random.dart';
 
 class LoveRepositoryImpl extends LoveRepository {

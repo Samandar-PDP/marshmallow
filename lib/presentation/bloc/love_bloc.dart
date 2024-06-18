@@ -3,7 +3,6 @@ import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 
 import 'package:http/http.dart' as http;
-
 import '../../domain/use_case/get_random_love.dart';
 
 part 'love_event.dart';
