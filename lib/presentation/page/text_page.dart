@@ -44,6 +44,9 @@ class _TextPageState extends State<TextPage> {
           icon: const Icon(CupertinoIcons.back),
         ),
       ),
+      endDrawer: const Drawer(
+        backgroundColor: Colors.indigo,
+      ),
       body: SingleChildScrollView(
         child: SizedBox(
           height: MediaQuery.of(context).size.height,
