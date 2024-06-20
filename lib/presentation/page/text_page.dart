@@ -1,5 +1,7 @@
+import 'package:confetti/confetti.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
@@ -15,6 +17,22 @@ class TextPage extends StatefulWidget {
 }
 
 class _TextPageState extends State<TextPage> {
+
+  late ConfettiController _controller;
+  late TextEditingController _boy;
+  late TextEditingController _girl;
+
+  @override
+  void initState() {
+    BlocProvider.of<LoveBloc>(context).add(GetLoveInitial());
+    _controller = ConfettiController(
+      duration: const Duration(seconds: 2)
+    );
+    _boy = TextEditingController();
+    _girl = TextEditingController();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,106 +44,163 @@ class _TextPageState extends State<TextPage> {
           icon: const Icon(CupertinoIcons.back),
         ),
       ),
-      body: Stack(children: [
-        Image.asset("assets/img/img.png",
-            fit: BoxFit.cover, width: double.infinity,height: double.infinity,),
-        Padding(
-            padding: const EdgeInsets.all(22.0),
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const Gap(50),
-                  Expanded(
-                    child: Card(
-                      surfaceTintColor: Colors.white,
-                      elevation: 0,
-                      child: Stack(children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(12),
-                          child: Image.asset(
-                            "assets/img/img_2.png",
-                            fit: BoxFit.cover,
-                            width: double.infinity,
-                            height: double.infinity,
-                          ),
+      body: SingleChildScrollView(
+        child: SizedBox(
+          height: MediaQuery.of(context).size.height,
+          child: Stack(children: [
+            Image.asset(
+              "assets/img/img.png",
+              fit: BoxFit.cover,
+              width: double.infinity,
+              height: double.infinity,
+            ),
+            Padding(
+                padding: const EdgeInsets.all(22.1),
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const Gap(50),
+                      Expanded(
+                        child: Card(
+                          surfaceTintColor: Colors.white,
+                          elevation: 0,
+                          child: Stack(children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(12),
+                              child: Image.asset(
+                                "assets/img/img_2.png",
+                                fit: BoxFit.cover,
+                                width: double.infinity,
+                                height: double.infinity,
+                              ),
+                            ),
+                            BlocConsumer<LoveBloc, LoveState>(
+                                builder: (context, state) {
+                                  if (state is LoveSuccess) { // mano holat
+                                    return TweenAnimationBuilder(
+                                        tween: IntTween(
+                                            begin: 0, end: state.value.toInt()),
+                                        duration: const Duration(seconds: 2),
+                                        builder: (context, v, s) {
+                                          return Center(
+                                              child: Text(
+                                            "$v%",
+                                            style: GoogleFonts.permanentMarker(
+                                                fontSize: 50,
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold),
+                                          ));
+                                        });
+                                  } else {
+                                    return Center(
+                                        child: Text(
+                                      "0",
+                                      style: GoogleFonts.permanentMarker(
+                                          fontSize: 50,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold),
+                                    ));
+                                  }
+                                },
+                                listener: (context, state) async {
+                                  if(state is LoveSuccess) {
+                                  //  await Future.delayed(const Duration(seconds: 2));
+                                    if(state.value >= 70) {
+                                      _controller.play();
+                                    }
+                                  }
+                                })
+                          ]),
                         ),
-                        BlocConsumer<LoveBloc, LoveState>(
-                            builder: (context, state) {
-                              if (state is LoveSuccess) {
-                                return TweenAnimationBuilder(
-                                    tween: Tween(begin: 0, end: state.value.toInt()),
-                                    duration: const Duration(seconds: 2),
-                                    builder: (context, v, s) {
-                                      return Center(
-                                          child: Text(
-                                        "$v%",
-                                        style: GoogleFonts.permanentMarker(
-                                            fontSize: 50,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold),
-                                      ));
-                                    });
-                              } else {
-                                return Center(
-                                    child: Text(
-                                  "0",
-                                  style: GoogleFonts.permanentMarker(
-                                      fontSize: 50,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold),
-                                ));
-                              }
-                            },
-                            listener: (context, state) {})
-                      ]),
-                    ),
-                  ),
-                  Expanded(
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Card(
-                            child: SizedBox(
-                                width: MediaQuery.of(context).size.width / 2.4,
-                                child: TextField(
-                                  style: GoogleFonts.robotoMono(fontSize: 18),
-                                  decoration: InputDecoration(
-                                      contentPadding:
-                                          EdgeInsets.symmetric(horizontal: 12),
-                                      border: InputBorder.none,
-                                      hintText: "Male"),
-                                ))),
-                        Card(
-                            child: SizedBox(
-                                width: MediaQuery.of(context).size.width / 2.4,
-                                child: TextField(
-                                  style: GoogleFonts.robotoMono(fontSize: 18),
-                                  decoration: InputDecoration(
-                                    contentPadding:
-                                        EdgeInsets.symmetric(horizontal: 12),
-                                    border: InputBorder.none,
-                                    hintText: "Female",
-                                  ),
-                                ))),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                      height: 50,
-                      width: MediaQuery.of(context).size.width,
-                      child: MyButton(
-                        onClick: _getRandom,
-                        icon: CupertinoIcons.heart_circle_fill,
-                        title: "Generate",
-                      )),
-                  const Gap(50)
-                ]))
-      ]),
+                      ),
+                      Expanded(
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Card(
+                                child: SizedBox(
+                                    width:
+                                        MediaQuery.of(context).size.width / 2.4,
+                                    child: TextField(
+                                      controller: _boy,
+                                      style:
+                                          GoogleFonts.robotoMono(fontSize: 18),
+                                      decoration: InputDecoration(
+                                          contentPadding: EdgeInsets.symmetric(
+                                              horizontal: 12),
+                                          border: InputBorder.none,
+                                          hintText: "Male"),
+                                    ))),
+                            Card(
+                                child: SizedBox(
+                                    width:
+                                        MediaQuery.of(context).size.width / 2.4,
+                                    child: TextField(
+                                      controller: _girl,
+                                      style:
+                                          GoogleFonts.robotoMono(fontSize: 18),
+                                      decoration: InputDecoration(
+                                        contentPadding: EdgeInsets.symmetric(
+                                            horizontal: 12),
+                                        border: InputBorder.none,
+                                        hintText: "Female",
+                                      ),
+                                    ))),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                          height: 50,
+                          width: MediaQuery.of(context).size.width,
+                          child: MyButton(
+                            onClick: _getRandom,
+                            icon: CupertinoIcons.heart_circle_fill,
+                            title: "Generate",
+                          )),
+                      const Gap(50)
+                    ])),
+            Column(
+              children: [
+                Center(child: _confetti(),),
+                Expanded(child: Container())
+              ],
+            )
+          ]),
+        ),
+      ),
     );
   }
+
+  _confetti() {
+    return ConfettiWidget(
+      confettiController: _controller,
+      blastDirectionality: BlastDirectionality.explosive,
+      blastDirection: 0,
+      emissionFrequency: 0.05,
+      numberOfParticles: 100,
+      maxBlastForce: 50,
+      minBlastForce: 20,
+      gravity: 0.1,
+      colors: const [
+        Colors.green,
+        Colors.red,
+        Colors.yellow,
+        Colors.blue,
+      ],
+      shouldLoop: false,
+    );
+  }
+
+
   _getRandom() {
+    if(_boy.text.isEmpty || _girl.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Enter Names"),backgroundColor: Colors.red)
+      );
+      return;
+    }
     BlocProvider.of<LoveBloc>(context).add(const GetRandomLove("", ""));
   }
 }

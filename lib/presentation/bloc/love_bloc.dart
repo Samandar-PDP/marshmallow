@@ -32,6 +32,8 @@ class LoveBloc extends Bloc<LoveEvent, LoveState> {
         } else {
           emit(const LoveError("Check your internet connection!"));
         }
+      } else if (event is GetLoveInitial){
+        emit(LoveInitial());
       }
     });
   }
