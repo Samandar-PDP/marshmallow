@@ -63,7 +63,7 @@ class _TextPageState extends State<TextPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      const Gap(50),
+                      const Gap(100),
                       Expanded(
                         child: Card(
                           surfaceTintColor: Colors.white,
@@ -75,7 +75,7 @@ class _TextPageState extends State<TextPage> {
                                 "assets/img/img_2.png",
                                 fit: BoxFit.cover,
                                 width: double.infinity,
-                                height: double.infinity,
+                                height: double.infinity
                               ),
                             ),
                             BlocConsumer<LoveBloc, LoveState>(
@@ -108,8 +108,8 @@ class _TextPageState extends State<TextPage> {
                                 },
                                 listener: (context, state) async {
                                   if(state is LoveSuccess) {
-                                  //  await Future.delayed(const Duration(seconds: 2));
                                     if(state.value >= 70) {
+                                      await Future.delayed(const Duration(seconds: 2));
                                       _controller.play();
                                     }
                                   }
@@ -130,7 +130,7 @@ class _TextPageState extends State<TextPage> {
                                       controller: _boy,
                                       style:
                                           GoogleFonts.robotoMono(fontSize: 18),
-                                      decoration: InputDecoration(
+                                      decoration: const InputDecoration(
                                           contentPadding: EdgeInsets.symmetric(
                                               horizontal: 12),
                                           border: InputBorder.none,
@@ -144,7 +144,7 @@ class _TextPageState extends State<TextPage> {
                                       controller: _girl,
                                       style:
                                           GoogleFonts.robotoMono(fontSize: 18),
-                                      decoration: InputDecoration(
+                                      decoration: const InputDecoration(
                                         contentPadding: EdgeInsets.symmetric(
                                             horizontal: 12),
                                         border: InputBorder.none,
@@ -162,8 +162,9 @@ class _TextPageState extends State<TextPage> {
                             icon: CupertinoIcons.heart_circle_fill,
                             title: "Generate",
                           )),
-                      const Gap(50)
-                    ])),
+                      const Gap(100),
+                    ]
+                )),
             Column(
               children: [
                 Center(child: _confetti(),),
