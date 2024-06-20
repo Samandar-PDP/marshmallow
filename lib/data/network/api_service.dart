@@ -8,8 +8,8 @@ part 'api_service.g.dart';
 abstract class ApiService {
   factory ApiService(Dio dio, {String baseUrl}) = _ApiService;
 
-  @GET("/random")
-  Future<LoveRandom> getLoveRandom();
+  @GET("/random?min=0&max=100")
+  Future<List<int>> getLoveRandom();
 }
 Dio buildDioClient(String base) { // flutter resource da bor
   final dio = Dio()..options = BaseOptions(baseUrl: base);

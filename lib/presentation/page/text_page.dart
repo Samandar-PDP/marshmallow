@@ -54,7 +54,7 @@ class _TextPageState extends State<TextPage> {
                             builder: (context, state) {
                               if (state is LoveSuccess) {
                                 return TweenAnimationBuilder(
-                                    tween: Tween(begin: 0, end: state.value),
+                                    tween: Tween(begin: 0, end: state.value.toInt()),
                                     duration: const Duration(seconds: 2),
                                     builder: (context, v, s) {
                                       return Center(

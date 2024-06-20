@@ -17,21 +17,21 @@ class LoveBloc extends Bloc<LoveEvent, LoveState> {
     on<LoveEvent>((event, emit) async {
       if (event is GetRandomLove) {
         emit(LoveLoading());
-        try {
-          final vaaa = await http.get(Uri.parse('http://10.0.2.2:8080/random'));
-          print(vaaa.body);
-          print(vaaa.statusCode);
-        } catch(e) {
-          print(e);
-        }
-
-        // await Future.delayed(const Duration(seconds: 2));
-        // final value = await getRandomLoveUseCase(event.boyName, event.girlName);
-        // if(value?.random != null) {
-        //   emit(LoveSuccess(value?.random ?? 0));
-        // } else {
-        //   emit(const LoveError("Check your internet connection!"));
+        // try {
+        //   final vaaa = await http.get(Uri.parse('http://10.0.2.2:8080/random'));
+        //   print(vaaa.body);
+        //   print(vaaa.statusCode);
+        // } catch(e) {
+        //   print(e);
         // }
+
+        await Future.delayed(const Duration(seconds: 2));
+        final value = await getRandomLoveUseCase(event.boyName, event.girlName);
+        if(value?.random != null) {
+          emit(LoveSuccess(value?.random ?? 0));
+        } else {
+          emit(const LoveError("Check your internet connection!"));
+        }
       }
     });
   }
