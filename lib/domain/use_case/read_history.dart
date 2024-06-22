@@ -3,6 +3,7 @@ import 'package:marshmallow/domain/repository/local_repository.dart';
 
 abstract class IReadAllHistoryUseCase {
   Future<List<Couple>> call();
+
 }
 
 class ReadAllHistoryUseCase extends IReadAllHistoryUseCase {
