@@ -1,9 +1,10 @@
 import 'dart:async';
 
 import 'package:floor/floor.dart';
-import 'package:marshmallow/data/db/love_dao.dart';
+import 'package:sqflite/sqflite.dart' as sqflite;
 
 import '../../domain/model/couple.dart';
+import 'love_dao.dart';
 
 part 'history_db.g.dart';
 

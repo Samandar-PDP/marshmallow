@@ -1,5 +1,6 @@
 import 'package:floor/floor.dart';
 import 'package:marshmallow/domain/model/couple.dart';
+
 @dao
 abstract class LoveDao {
   @Query('SELECT * FROM Couple')
