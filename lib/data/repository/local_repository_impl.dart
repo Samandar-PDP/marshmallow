@@ -1,5 +1,3 @@
-import 'package:floor/floor.dart';
-import 'package:marshmallow/data/db/history_db.dart';
 import 'package:marshmallow/data/db/love_dao.dart';
 import 'package:marshmallow/domain/model/couple.dart';
 import 'package:marshmallow/domain/repository/local_repository.dart';

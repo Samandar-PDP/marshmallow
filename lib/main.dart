@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:marshmallow/presentation/bloc/love_bloc.dart';
+import 'package:marshmallow/presentation/bloc/history/history_bloc.dart';
+import 'package:marshmallow/presentation/bloc/text/love_bloc.dart';
 import 'package:marshmallow/util/app_router.dart';
 
 import 'package:marshmallow/di/injection_container.dart' as di;
@@ -19,7 +20,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (_) => di.sl<LoveBloc>())
+        BlocProvider(create: (_) => di.sl<LoveBloc>()),
+        BlocProvider(create: (_) => di.sl<HistoryBloc>()),
       ],
       child: MaterialApp.router(
         routerConfig: AppRouter.router,

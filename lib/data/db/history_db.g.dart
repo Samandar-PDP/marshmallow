@@ -96,7 +96,7 @@ class _$HistoryDb extends HistoryDb {
       },
       onCreate: (database, version) async {
         await database.execute(
-            'CREATE TABLE IF NOT EXISTS `Couple` (`id` INTEGER NOT NULL, `boy` TEXT NOT NULL, `girl` TEXT NOT NULL, `loveValue` INTEGER NOT NULL, `date` TEXT NOT NULL, PRIMARY KEY (`id`))');
+            'CREATE TABLE IF NOT EXISTS `Couple` (`id` INTEGER, `boy` TEXT NOT NULL, `girl` TEXT NOT NULL, `loveValue` INTEGER NOT NULL, `date` TEXT NOT NULL, PRIMARY KEY (`id`))');
 
         await callback?.onCreate?.call(database, version);
       },
@@ -138,7 +138,7 @@ class _$LoveDao extends LoveDao {
   Future<List<Couple>> getAllHistory() async {
     return _queryAdapter.queryList('SELECT * FROM Couple',
         mapper: (Map<String, Object?> row) => Couple(
-            id: row['id'] as int,
+            id: row['id'] as int?,
             boy: row['boy'] as String,
             girl: row['girl'] as String,
             loveValue: row['loveValue'] as int,
